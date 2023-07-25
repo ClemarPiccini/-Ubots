@@ -29,4 +29,4 @@ ADMINER_PORT= 8080
 
 -abrir novo terminal no diretorio app e executar o comando:
 
-```docker compose up``
+```docker compose up```
