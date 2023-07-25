@@ -30,3 +30,7 @@ ADMINER_PORT= 8080
 -abrir novo terminal no diretorio app e executar o comando:
 
 ```docker compose up```
+
+### Para testar as Rotas:
+
+-arquivo json dentro da pasta insomnia
