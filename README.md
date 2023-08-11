@@ -16,7 +16,7 @@
 
 -criar arquivo .env na raiz com as seguintes informações:
 
-MYSQL_DATABASE="db_movie"  
+MYSQL_DATABASE="db_barber"  
 MYSQL_USER="user"  
 MYSQL_PASSWORD="password"  
 MYSQL_ROOT_PASSWORD="password"  
