@@ -1,57 +1,56 @@
-const Cliente = require('../models/admin/clientes');
+const Preco = require('../models/admin/precos');
 
-async function createCliente(cliente) {
+async function createPrecos(preco) {
   try {
-    cliente = await Cliente.create({ ...cliente });
-    return cliente.toJSON();
+    preco = await Preco.create({ ...preco });
+    return preco.toJSON();
   } catch (error) {
-    console.error('Não foi possível criar o cliente: ', error);
-    throw new Error('Erro ao criar o cliente');
+    console.error('Não foi possível criar o preco: ', error);
+    throw new Error('Erro ao criar o preco');
   }
 }
 
-async function getAllClientes() {
+async function getAllPrecos() {
   try {
-    const clientes = await Cliente.findAll();
-    return clientes.map(cliente => cliente.toJSON());
+    const precos = await Preco.findAll();
+    return precos.map(preco => preco.toJSON());
   } catch (error) {
-    console.error('Não foi possível buscar os clientes: ', error);
-    throw new Error('Erro ao buscar os clientes');
+    console.error('Não foi possível buscar os precos: ', error);
+    throw new Error('Erro ao buscar os precos');
   }
 }
 
-async function updateCliente(id, data) {
+async function updatePreco(id, data) {
   try {
-    const cliente = await Cliente.findByPk(id);
-    if (cliente) {
-      cliente.nome = data.nome;
-      cliente.telefone = data.telefone;
-      cliente.email = data.email;
-      cliente.data_nascimento = data.data_nascimento;
+    const preco = await Preco.findByPk(id);
+    if (preco) {
+        preco.nome = data.nome;
+        preco.tipo = data.tipo;
+        preco.valor = data.valor;
 
-      await cliente.save();
-      console.log('Cliente atualizado', cliente.toJSON());
+      await preco.save();
+      console.log('Preço atualizado', preco.toJSON());
     } else {
-      throw new Error('Cliente não encontrado');
+      throw new Error('Preço não encontrado');
     }
   } catch (error) {
-    console.error('Não foi possível atualizar o cliente: ', error);
-    throw new Error('Erro ao atualizar o cliente');
+    console.error('Não foi possível atualizar o preco: ', error);
+    throw new Error('Erro ao atualizar o preco');
   }
 }
 
-async function deleteCliente(id) {
+async function deletePreco(id) {
   try {
-    const cliente = await Cliente.findByPk(id);
-    if (cliente) {
-      await cliente.destroy();
-      console.log('Cliente excluído: ', cliente.toJSON());
+    const preco = await Preco.findByPk(id);
+    if (preco) {
+      await preco.destroy();
+      console.log('preco excluído: ', preco.toJSON());
     } else {
-      console.log('Cliente não encontrado');
+      console.log('preco não encontrado');
     }
   } catch (error) {
-    console.error('Não foi possível excluir o cliente: ', error);
+    console.error('Não foi possível excluir o preco: ', error);
   }
 }
 
-module.exports = { createCliente, getAllClientes, updateCliente, deleteCliente };
+module.exports = { createPrecos, getAllPrecos, updatePreco, deletePreco };
