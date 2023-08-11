@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('./core');
+const sequelize = require('../core');
 
 const Produto = sequelize.define('produto', {
   nome: {
