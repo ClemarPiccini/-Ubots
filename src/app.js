@@ -1,6 +1,8 @@
 const express = require('express')
 
 const produtoRouter = require('./routes/produtos-routes');
+const agendaRouter = require('./routes/agenda-routes');
+const clienteRouter = require('./routes/clientes-routes');
 
 const bodyParser = require('body-parser');
 const app = express();
@@ -10,6 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));    
 
 app.use('/produtos', produtoRouter);
+app.use('/horarios', agendaRouter);
+app.use('/clientes', clienteRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}.`);
