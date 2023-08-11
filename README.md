@@ -1,4 +1,6 @@
-# API utilizando Node.js 
+# Barber-Controller  
+
+## API utilizando Node.js  
 
 ## DATABASE:
 
