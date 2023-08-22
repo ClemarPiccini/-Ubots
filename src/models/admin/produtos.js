@@ -9,10 +9,6 @@ const Produto = sequelize.define('produto', {
   quantidade: {
     type: Sequelize.INTEGER,
     allowNull: false,
-  },
-  valor: {
-    type: Sequelize.STRING,
-    allowNull: false,
   }
 });
 

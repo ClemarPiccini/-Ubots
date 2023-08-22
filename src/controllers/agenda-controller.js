@@ -31,8 +31,9 @@ async function updateAgenda(id, data) {
 
       await agenda.save();
       console.log('Agenda atualizada', agenda.toJSON());
+      return agenda.toJSON()
     } else {
-      throw new Error('Agenda não encontrada');
+      return null;
     }
   } catch (error) {
     console.error('Não foi possível atualizar a agenda: ', error);

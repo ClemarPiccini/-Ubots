@@ -23,9 +23,13 @@ router.get('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const updatedProduto = await controller.updateProduto(req.params.id, req.body);
-    res.send(updatedProduto);
+    if (updatedProduto) {
+      res.send(updatedProduto);
+    } else {
+      res.status(404).json({ message: 'Produto não encontrado' });
+    }
   } catch (error) {
-    res.status(400).send({ 'message': error.message });
+    res.status(400).send({ message: error.message });
   }
 });
 

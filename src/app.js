@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const produtoRouter = require('./routes/produtos-routes');
 const agendaRouter = require('./routes/agenda-routes');
@@ -7,8 +8,8 @@ const precoRouter = require('./routes/precos-routes');
 
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 3000;
-
+const PORT = 3001;
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));    
 

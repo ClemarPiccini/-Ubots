@@ -20,32 +20,31 @@ async function getAllProduto() {
   }
 }
 
-async function updateProduto (id, data) {
+async function updateProduto(id, data) {
   try {
-    const produto  = await Produto.findByPk(id);
-    if (produto ) {
-        produto.nome = data.nome;
-        produto.quantidade = data.quantidade;
-        produto.valor = data.valor;
-  
-      
-      await produto .save();
-      console.log ('produto atualizado' , produto .toJSON());
+    const produto = await Produto.findByPk(id);
+    if (produto) {
+      produto.nome = data.nome;
+      produto.quantidade = data.quantidade;
+
+      await produto.save();
+      console.log('produto atualizado', produto.toJSON());
+      return produto.toJSON(); // Return the updated product
     } else {
-      res.status(404).json({ message: 'Produto não encontrado' });
+      return null; // Indicate that the product was not found
     }
   } catch (error) {
-    console.error('Não foi possível atualizar o produto: ', error);
-    res.status(500).json({ message: 'Erro ao atualizar o produto' });
+    console.error('Não foi possível atualizar o produto:', error);
+    throw new Error('Erro ao atualizar o produto');
   }
 }
 
-async function deleteProduto (id) {
+async function deleteProduto(id) {
   try {
-    const produto  = await produto.findByPk(id);
-    if (produto) {
-      await produto .destroy();
-      console.log('Produto excluido: ', produto.toJSON());
+    const produtoEncontrado = await Produto.findByPk(id);
+    if (produtoEncontrado) {
+      await produtoEncontrado.destroy();
+      console.log('Produto excluido: ', produtoEncontrado.toJSON());
     } else {
       console.log('Produto não encontrado');
     }
