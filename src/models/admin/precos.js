@@ -6,10 +6,6 @@ const Preco = sequelize.define('preco', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  tipo: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
   valor: {
     type: Sequelize.DECIMAL(10, 2), // Armazena valores decimais (até 10 dígitos no total, com 2 casas decimais)
     allowNull: false,

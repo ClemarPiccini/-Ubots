@@ -25,7 +25,6 @@ async function updatePreco(id, data) {
     const preco = await Preco.findByPk(id);
     if (preco) {
         preco.nome = data.nome;
-        preco.tipo = data.tipo;
         preco.valor = data.valor;
 
       await preco.save();

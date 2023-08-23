@@ -30,6 +30,7 @@ async function updateCliente(id, data) {
 
       await cliente.save();
       console.log('Cliente atualizado', cliente.toJSON());
+      return cliente.toJSON()
     } else {
       throw new Error('Cliente não encontrado');
     }
