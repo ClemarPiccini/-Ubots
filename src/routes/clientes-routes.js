@@ -5,11 +5,14 @@ const router = express.Router();
 
 // Rota para criar um novo cliente
 router.post('/', async (req, res) => {
+  const clienteData = req.body;
+
   try {
-    const cliente = await controller.createCliente(req.body);
-    res.send(cliente);
+    const novoCliente = await controller.createCliente(clienteData);
+    res.status(201).json(novoCliente);
   } catch (error) {
-    res.status(400).send({ 'message': error.parent.sqlMessage });
+    console.error('Erro ao criar o cliente na rota: ', error);
+    res.status(500).json({ message: 'Erro ao criar o cliente' });
   }
 });
 

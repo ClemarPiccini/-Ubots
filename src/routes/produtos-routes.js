@@ -5,14 +5,16 @@ const router = express.Router();
 
 // Rota para criar um novo produto
 router.post('/', async (req, res) => {
+  const produtoData = req.body;
+
   try {
-    const produto = await controller.createProduto(req.body);
-    res.send(produto);
+    const novoProduto = await controller.createProduto(produtoData);
+    res.status(201).json(novoProduto);
   } catch (error) {
-    res.status(400).send({ 'message': error.parent.sqlMessage });
+    console.error('Erro ao criar o produto na rota: ', error);
+    res.status(500).json({ message: 'Erro ao criar o produto' });
   }
 });
-
 // Rota para buscar todos os produtos
 router.get('/', async (req, res) => {
   const produtos = await controller.getAllProduto();
