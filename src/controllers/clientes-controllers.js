@@ -2,8 +2,8 @@ const Cliente = require('../models/admin/clientes');
 
 async function createCliente(cliente) {
   try {
-    cliente = await Cliente.create({ ...cliente });
-    return cliente.toJSON();
+    const novoCliente = await Cliente.create({ ...cliente });
+    return novoCliente.toJSON();
   } catch (error) {
     console.error('Não foi possível criar o cliente: ', error);
     throw new Error('Erro ao criar o cliente');
@@ -30,6 +30,7 @@ async function updateCliente(id, data) {
 
       await cliente.save();
       console.log('Cliente atualizado', cliente.toJSON());
+      return cliente.toJSON()
     } else {
       throw new Error('Cliente não encontrado');
     }

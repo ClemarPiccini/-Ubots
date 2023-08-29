@@ -1,1 +1,1 @@
-//implementrar algoritmo para gerar grafico de ganhos, estoque, e agendamentos.
+//implementrar algoritmo para gerar relatorio de ganhos, estoque, e agendamentos.

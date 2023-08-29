@@ -6,9 +6,16 @@ async function createAgenda(agenda) {
     return agenda.toJSON();
   } catch (error) {
     console.error('Não foi possível criar a agenda: ', error);
-    throw new Error('Erro ao criar o agenda');
+    
+    if (error.name === 'SequelizeDatabaseError' && error.original.sqlState === '22007') {
+      // Tratar o erro específico de valor de data inválido
+      return { error: 'A data fornecida é inválida.' };
+    }
+
+    throw new Error('Erro ao criar a agenda');
   }
 }
+
 
 async function getAllAgendas() {
   try {

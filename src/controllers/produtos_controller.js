@@ -2,11 +2,11 @@ const Produto = require('../models/admin/produtos');
 
 async function createProduto(produto) {
   try {
-    produto = await Produto.create({ ...produto});
-    return produto.toJSON();
+    const novoProduto = await Produto.create({ ...produto });
+    return novoProduto.toJSON();
   } catch (error) {
     console.error('Não foi possível criar o produto: ', error);
-    res.status(500).json({ message: 'Erro ao criar o produto' });
+    throw new Error('Erro ao criar o produto');
   }
 }
 
@@ -26,6 +26,7 @@ async function updateProduto(id, data) {
     if (produto) {
       produto.nome = data.nome;
       produto.quantidade = data.quantidade;
+      produto.isBeverage = data.isBeverage;
 
       await produto.save();
       console.log('produto atualizado', produto.toJSON());
