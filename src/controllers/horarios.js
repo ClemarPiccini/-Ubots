@@ -10,4 +10,6 @@ function formatarData(data) {
     const dataFormatada = dataCriacao.toLocaleDateString('pt-BR', opcoesFormato);
   
     return dataFormatada;
-  }
+}
+
+module.exports = {formatarData}
