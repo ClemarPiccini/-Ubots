@@ -10,14 +10,6 @@ const Cliente = sequelize.define('cliente', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: true,
-    unique: true,
-    validate: {
-      isEmail: true,
-    },
-  },
 });
 
 Cliente.sync();

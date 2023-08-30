@@ -26,7 +26,6 @@ async function updateCliente(id, data) {
     if (cliente) {
       cliente.nome = data.nome;
       cliente.telefone = data.telefone;
-      cliente.email = data.email;
 
       await cliente.save();
       console.log('Cliente atualizado', cliente.toJSON());

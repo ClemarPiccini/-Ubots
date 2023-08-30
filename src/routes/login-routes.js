@@ -22,17 +22,17 @@ router.post('/', async (req, res) => {
     }
 
     // criar token de autenticação
-    const token = jwt.sign({ 
+    const token = jwt.sign({
       nome: user.nome,
       email: user.email,
-    }, process.env.SECRET_KEY, { expiresIn: '8h' });
+    });
     res.json({ token });
     
-  } 
+  }
   catch (error) {
     res.status(400).send({ 'message': error.message});
     
   }
 });
 
-module.exports = router;  
+module.exports = router;
