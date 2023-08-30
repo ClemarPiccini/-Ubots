@@ -20,6 +20,7 @@ async function getAllClientes() {
   }
 }
 
+
 async function updateCliente(id, data) {
   try {
     const cliente = await Cliente.findByPk(id);
@@ -53,4 +54,30 @@ async function deleteCliente(id) {
   }
 }
 
-module.exports = { createCliente, getAllClientes, updateCliente, deleteCliente };
+async function getClientesPaginados(pageNumber, itemsPerPage) {
+  try {
+    const totalClientes = await Cliente.count();
+    const totalPages = Math.ceil(totalClientes / itemsPerPage);
+
+    const offset = (pageNumber - 1) * itemsPerPage;
+    const clientes = await Cliente.findAll({
+      offset,
+      limit: itemsPerPage,
+    });
+
+    const clientesData = clientes.map(cliente => cliente.toJSON());
+
+    return {
+      totalPages,
+      currentPage: pageNumber,
+      itemsPerPage,
+      totalItems: totalClientes,
+      clientes: clientesData,
+    };
+  } catch (error) {
+    console.error('Não foi possível buscar os clientes paginados: ', error);
+    throw new Error('Erro ao buscar os clientes paginados');
+  }
+}
+
+module.exports = { createCliente, getAllClientes, getClientesPaginados, updateCliente, deleteCliente };

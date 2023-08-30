@@ -42,4 +42,17 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Rota para buscar clientes paginados
+router.get('/paginados', async (req, res) => {
+  const pageNumber = parseInt(req.query.pageNumber) || 1;
+  const itemsPerPage = parseInt(req.query.itemsPerPage) || 6;
+
+  try {
+    const clientesPaginados = await controller.getClientesPaginados(pageNumber, itemsPerPage);
+    res.send(clientesPaginados);
+  } catch (error) {
+    res.status(500).send({ message: 'Erro ao buscar clientes paginados' });
+  }
+});
+
 module.exports = router;
