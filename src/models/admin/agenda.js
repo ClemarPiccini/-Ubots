@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../core');
+const Servico =  require('./servicos');
+const Cliente = require('./clientes');
 
-const Agenda = sequelize.define('agenda', {
+const Agenda = sequelize.define('Agenda', {
   data: {
     type: Sequelize.DATE,
     allowNull: false,
@@ -10,15 +12,30 @@ const Agenda = sequelize.define('agenda', {
     type: Sequelize.TIME,
     allowNull: false,
   },
-  cliente: {
+  clienteNome: {
     type: Sequelize.STRING,
     allowNull: false,
+    references: {
+      model: Cliente,
+      key: 'nome',
+    },
   },
-  servico: {
+  servicoNome: {
     type: Sequelize.STRING,
     allowNull: false,
+    references: {
+      model: Servico,
+      key: 'nome',
+    },
   },
 });
+
+Agenda.belongsTo(Servico, { foreignKey: 'servicoNome' });
+Servico.hasMany(Agenda, { foreignKey: 'servicoNome' });
+
+Agenda.belongsTo(Cliente, { foreignKey: 'clienteNome' });
+Cliente.hasMany(Agenda, { foreignKey: 'clienteNome' });
+
 
 Agenda.sync();
 

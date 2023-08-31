@@ -1,18 +1,17 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../core');
 
-const Cliente = sequelize.define('cliente', {
+const Servico = sequelize.define('Servico', {
   nome: {
     type: Sequelize.STRING,
     primaryKey: true,
     allowNull: false,
   },
-  telefone: {
-    type: Sequelize.STRING,
-    allowNull: false,
+  valor: {
+    type: Sequelize.DECIMAL(10, 2),
   },
 });
 
-Cliente.sync();
+Servico.sync();
 
-module.exports = Cliente;
+module.exports = Servico;

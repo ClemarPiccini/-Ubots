@@ -11,10 +11,14 @@ const Produto = sequelize.define('produto', {
     allowNull: false,
   },
   isBeverage: {
-    type: Sequelize.BOOLEAN, // Represents whether the product is a beverage or not
+    type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: false, // Default value indicating it's not a beverage
-  }
+    defaultValue: false, 
+  },
+  valor: {
+    type: Sequelize.DECIMAL(10, 2), 
+    allowNull: false,
+  },
 });
 
 Produto.sync();

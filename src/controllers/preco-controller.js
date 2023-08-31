@@ -1,4 +1,4 @@
-const Preco = require('../models/admin/precos');
+const Preco = require('../models/admin/servicos');
 
 async function createPrecos(preco) {
   try {

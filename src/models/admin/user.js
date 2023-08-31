@@ -10,18 +10,10 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  nivel_acesso: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
-  },
-  empresa: {
-    type: Sequelize.STRING,
-    allowNull: false,
   },
   senha: {
     type: Sequelize.STRING,

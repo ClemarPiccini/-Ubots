@@ -27,6 +27,7 @@ async function updateProduto(id, data) {
       produto.nome = data.nome;
       produto.quantidade = data.quantidade;
       produto.isBeverage = data.isBeverage;
+      produto.valor = data.valor;
 
       await produto.save();
       console.log('produto atualizado', produto.toJSON());
