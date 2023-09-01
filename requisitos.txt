@@ -9,3 +9,12 @@ corrigir erro de login;
 clientes mostrando lista duplicada;
 
 Revisar todas as paginas atras de bugs e melhorar css;
+
+
+MYSQL_DATABASE="db_barber"
+MYSQL_USER="user"
+MYSQL_PASSWORD="password"
+MYSQL_ROOT_PASSWORD="password"
+MYSQL_PORT= 3306
+ADMINER_PORT= 8080
+SECRET_KEY= "chavedesegurancaultrasecretapowermig"
