@@ -12,8 +12,22 @@ async function createCliente(cliente) {
 
 async function getAllClientes() {
   try {
+    // Busca todos os clientes do banco de dados
     const clientes = await Cliente.findAll();
-    return clientes.map(cliente => cliente.toJSON());
+
+    // Ordena os clientes em ordem alfabética com base no nome (ou outra propriedade apropriada)
+    clientes.sort((a, b) => {
+      const nomeA = a.nome.toLowerCase();
+      const nomeB = b.nome.toLowerCase();
+      if (nomeA < nomeB) return -1;
+      if (nomeA > nomeB) return 1;
+      return 0;
+    });
+
+    // Mapeia os clientes para JSON
+    const clientesJSON = clientes.map(cliente => cliente.toJSON());
+
+    return clientesJSON;
   } catch (error) {
     console.error('Não foi possível buscar os clientes: ', error);
     throw new Error('Erro ao buscar os clientes');
@@ -54,30 +68,4 @@ async function deleteCliente(id) {
   }
 }
 
-async function getClientesPaginados(pageNumber, itemsPerPage) {
-  try {
-    const totalClientes = await Cliente.count();
-    const totalPages = Math.ceil(totalClientes / itemsPerPage);
-
-    const offset = (pageNumber - 1) * itemsPerPage;
-    const clientes = await Cliente.findAll({
-      offset,
-      limit: itemsPerPage,
-    });
-
-    const clientesData = clientes.map(cliente => cliente.toJSON());
-
-    return {
-      totalPages,
-      currentPage: pageNumber,
-      itemsPerPage,
-      totalItems: totalClientes,
-      clientes: clientesData,
-    };
-  } catch (error) {
-    console.error('Não foi possível buscar os clientes paginados: ', error);
-    throw new Error('Erro ao buscar os clientes paginados');
-  }
-}
-
-module.exports = { createCliente, getAllClientes, getClientesPaginados, updateCliente, deleteCliente };
+module.exports = { createCliente, getAllClientes, updateCliente, deleteCliente };

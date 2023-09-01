@@ -1,9 +1,25 @@
 const Agenda = require('../models/admin/agenda.js');
 
+// Função para formatar a data 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('pt-BR');
+}
+
+// Função para formatar o horário
+function formatTime(timeString) {
+  return timeString;
+}
+
 async function createAgenda(agenda) {
   try {
     agenda = await Agenda.create({ ...agenda });
-    return agenda.toJSON();
+    return {
+        servicoNome: (agenda.servicoNome),
+        data: formatDate(agenda.data),
+        horario: formatTime(agenda.horario),
+        clienteNome: (agenda.clienteNome)
+      };
   } catch (error) {
     console.error('Não foi possível criar a agenda: ', error);
     
@@ -16,14 +32,24 @@ async function createAgenda(agenda) {
   }
 }
 
-
 async function getAllAgendas() {
   try {
-    const agenda = await Agenda.findAll();
-    return agenda.map(agenda => agenda.toJSON());
+    const agendas = await Agenda.findAll();
+
+    // Mapeia os objetos Agenda para um formato desejado
+    const formattedAgendas = agendas.map(agenda => {
+      return {
+        servicoNome: (agenda.servicoNome),
+        data: formatDate(agenda.data),
+        horario: formatTime(agenda.horario),
+        clienteNome: (agenda.clienteNome)
+      };
+    });
+
+    return formattedAgendas;
   } catch (error) {
-    console.error('Não foi possível buscar os horarios: ', error);
-    throw new Error('Erro ao buscar os horarios');
+    console.error('Não foi possível buscar os horários: ', error);
+    throw new Error('Erro ao buscar os horários');
   }
 }
 
@@ -38,7 +64,7 @@ async function updateAgenda(id, data) {
 
       await agenda.save();
       console.log('Agenda atualizada', agenda.toJSON());
-      return agenda.toJSON()
+      return toJSON()
     } else {
       return null;
     }

@@ -1,13 +1,3 @@
 relatorio de ganhos com filtros (periodo);
 
-bebidas: botao + e - fazer salvar o saldo no banco
-
-serviços setar barba, cabelo, sobrancelha e barba e cabelo;
-
-setar valores nos produtos e servicos;
-
-relacionar tabela de clientes com agendamentos;
-
-relacionar tabela de produtos e preços;
-
-clientes sistema de paginação e ordenar em ordem alfabetica
+bebidas: botao + e - fazer salvar o saldo no banco;
