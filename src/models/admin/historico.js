@@ -1,12 +1,9 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../core');
+const Produto = require('./produtos');
 
-const Produto = sequelize.define('produto', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
+const Historico = sequelize.define('historico', {
+
   nome: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -24,8 +21,19 @@ const Produto = sequelize.define('produto', {
     type: Sequelize.DECIMAL(10, 2), 
     allowNull: false,
   },
+  produtoId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+      model: Produto,
+      key: 'id',
+    },
+  }
 });
 
-Produto.sync();
+Historico.belongsTo(Produto, { foreignKey: 'produtoId' });
+Produto.hasMany(Historico, { foreignKey: 'produtoId' });
 
-module.exports = Produto;
+Historico.sync();
+
+module.exports = Historico;

@@ -1,9 +1,41 @@
 const Produto = require('../models/admin/produtos');
+const Historico = require('../models/admin/historico');
+
+const produtosCopiados = {};
+
+async function copiarParaTabelaHistorico(produtoId) {
+  try {
+    if (!produtosCopiados[produtoId]) {
+      console.log('produtoId:', produtoId);
+      const produto = await Produto.findByPk(produtoId);
+      if (produto) {
+        console.log('Copiando dados para histórico:', produto.toJSON()); // Adicione esta linha para depuração
+        await Historico.create({
+          nome: produto.nome,
+          quantidade: produto.quantidade,
+          isBeverage: produto.isBeverage,
+          valor: produto.valor,
+          produtoId: produto.id
+        });
+        console.log('Dados copiados para a tabela de histórico com sucesso!');
+        produtosCopiados[produtoId] = false;
+      } else {
+        console.log('Produto não encontrado');
+      }
+    } else {
+      console.log('Dados já copiados para a tabela de histórico.');
+    }
+  } catch (error) {
+    console.error('Erro ao copiar os dados para a tabela de histórico:', error);
+    throw new Error('Erro ao copiar os dados para a tabela de histórico');
+  }
+}
 
 async function createProduto(produto) {
   try {
-    const novoProduto = await Produto.create({ ...produto });
-    return novoProduto.toJSON();
+    produto = await Produto.create({ ...produto });
+    copiarParaTabelaHistorico(produto.id);
+    return produto.toJSON();
   } catch (error) {
     console.error('Não foi possível criar o produto: ', error);
     throw new Error('Erro ao criar o produto');
@@ -12,11 +44,11 @@ async function createProduto(produto) {
 
 async function getAllProduto() {
   try {
-    produtos = await Produto.findAll();
+    const produtos = await Produto.findAll();
     return produtos.map(produto => produto.toJSON());
   } catch (error) {
     console.error('Não foi possível buscar os produtos: ', error);
-    res.status(500).json({ message: 'Erro ao buscar os produtos' });
+    throw new Error('Erro ao buscar os produtos');
   }
 }
 
@@ -30,10 +62,11 @@ async function updateProduto(id, data) {
       produto.valor = data.valor;
 
       await produto.save();
-      console.log('produto atualizado', produto.toJSON());
-      return produto.toJSON(); // Return the updated product
+      copiarParaTabelaHistorico(produto.id);
+      console.log('Produto atualizado', produto.toJSON());
+      return produto.toJSON();
     } else {
-      return null; // Indicate that the product was not found
+      return null;
     }
   } catch (error) {
     console.error('Não foi possível atualizar o produto:', error);
@@ -46,12 +79,13 @@ async function deleteProduto(id) {
     const produtoEncontrado = await Produto.findByPk(id);
     if (produtoEncontrado) {
       await produtoEncontrado.destroy();
-      console.log('Produto excluido: ', produtoEncontrado.toJSON());
+      console.log('Produto excluído: ', produtoEncontrado.toJSON());
     } else {
       console.log('Produto não encontrado');
     }
   } catch (error) {
     console.error('Não foi possível excluir o produto: ', error);
+    throw new Error('Erro ao excluir o produto');
   }
 }
 

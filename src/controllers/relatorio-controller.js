@@ -18,7 +18,6 @@ const gerarRelatorioProdutos = (produtos) => {
     return relatorio;
   };
 
-
   const gerarRelatorioServicos = (agendamentos) => {
 
     // Obter os dados dos serviços

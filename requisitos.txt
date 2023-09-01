@@ -1,3 +1,11 @@
 relatorio de ganhos com filtros (periodo);
 
-bebidas: botao + e - fazer salvar o saldo no banco;
+bebidas: botao - fazer salvar o saldo no banco com  o evento de click;
+
+remover Botao + dos produtos;
+
+corrigir erro de login;
+
+clientes mostrando lista duplicada;
+
+Revisar todas as paginas atras de bugs e melhorar css;
