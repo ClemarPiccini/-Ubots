@@ -1,5 +1,7 @@
 # Barber-Controller  
 
+    Este projeto tem por objetivo criar uma API para controle de estoque, agendamentos e relatórios de faturamento mensal ou por periodo especificado de uma barbearia.  
+
 ## API utilizando Node.js  
 
 ## DATABASE:
@@ -12,6 +14,11 @@
 *Express*  
 *Sequelize*  
 
+### Para rodar o código:  
+
+- Faça o fork desse repositório para o seu GitHub  
+- Clone o repositório em sua máquina  
+
 ### Passos para executar o codigo:
 
 -criar arquivo .env na raiz com as seguintes informações:
@@ -23,16 +30,19 @@ MYSQL_ROOT_PASSWORD="password"
 MYSQL_PORT= 3306  
 ADMINER_PORT= 8080  
 
--abrir um terminal e executar o comando:
+-abrir um terminal na pasta SRC e executar o comando:
 
 ```npm install```   
 
-```npm start```
-
--abrir novo terminal no diretorio app e executar o comando:
-
 ```docker compose up```
+
+-abrir novo terminal na pasta SRC e executar o comando:
+
+```npm start```
 
 ### Para testar as Rotas:
 
 -arquivo json dentro da pasta insomnia
+
+### Exemplos de uso das rotas:
+
