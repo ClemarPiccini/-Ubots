@@ -44,5 +44,10 @@ ADMINER_PORT= 8080
 
 -arquivo json dentro da pasta insomnia
 
-### Exemplos de uso das rotas:
+### Estrutura de pastas e exemplo do codigo:  
 
+
+![Alt text](image.png)
+
+
+### Exemplos de uso das rotas:
