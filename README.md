@@ -51,3 +51,7 @@ ADMINER_PORT= 8080
 
 
 ### Exemplos de uso das rotas:
+
+![Alt text](image-1.png)
+
+![Alt text](image-2.png)
